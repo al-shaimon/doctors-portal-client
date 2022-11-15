@@ -16,7 +16,7 @@ const Home = () => {
       <TermsBanner></TermsBanner>
       <MakeAppointment></MakeAppointment>
       <Testimonial></Testimonial>
-      <ContactForm></ContactForm>
+      <ContactForm> </ContactForm>
     </div>
   );
 };

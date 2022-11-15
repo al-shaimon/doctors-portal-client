@@ -14,7 +14,7 @@ const ContactForm = () => {
       <div className="hero">
         <div className="hero-content flex-col my-10">
           <div className="text-center mb-5">
-            <h4 className="text-lg text-primary text-center font-bold">Contact Us</h4>
+            <h4 className="text-lg text-secondary text-center font-bold">Contact Us</h4>
             <h1 className="text-white text-4xl font-bold">Stay connected with us</h1>
           </div>
           <form>
