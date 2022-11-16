@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const SignUp = () => {
@@ -11,7 +11,9 @@ const SignUp = () => {
     formState: { errors },
   } = useForm();
 
-  const { createUser, updateUser } = useContext(AuthContext);
+  const { createUser, updateUser, signInWithGoogle } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [signUpError, setSignUpError] = useState('');
 
@@ -34,6 +36,16 @@ const SignUp = () => {
         console.error(error);
         setSignUpError(error.message);
       });
+  };
+
+  const handleGoogleSignIn = (data) => {
+    signInWithGoogle()
+      .then((result) => {
+        const user = result.user;
+        navigate('/');
+        console.log(user);
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -95,7 +107,9 @@ const SignUp = () => {
           </Link>
         </p>
         <div className="divider">OR</div>
-        <button className="btn btn-outline w-full">CONTINUE WITH GOOGLE</button>
+        <button onClick={handleGoogleSignIn} className="btn btn-outline w-full">
+          CONTINUE WITH GOOGLE
+        </button>
       </div>
     </div>
   );
