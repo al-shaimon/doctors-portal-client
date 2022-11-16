@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
@@ -12,6 +12,10 @@ const Login = () => {
 
   const { signIn } = useContext(AuthContext);
   const [loginError, setLoginError] = useState('');
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location.state?.from?.pathname || '/';
 
   const handleLogin = (data) => {
     console.log(data);
@@ -20,6 +24,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         console.log(user);
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         console.error(error.message);
@@ -63,10 +68,10 @@ const Login = () => {
             </label>
           </div>
           <input className="btn btn-accent w-full" value="Login" type="submit" />
-          <div>{loginError && <p className='text-red-600'>{loginError}</p>}</div>
+          <div>{loginError && <p className="text-red-600">{loginError}</p>}</div>
         </form>
         <p>
-          New to Doctors Portal? {' '}
+          New to Doctors Portal?{' '}
           <Link className="text-secondary" to="/signup">
             Create new account
           </Link>
