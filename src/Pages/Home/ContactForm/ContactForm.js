@@ -31,7 +31,10 @@ const ContactForm = () => {
                 placeholder="Subject"
                 className="input input-bordered w-full mb-3"
               />
-              <textarea className="textarea textarea-bordered" placeholder="Your message"></textarea>
+              <textarea
+                className="textarea textarea-bordered"
+                placeholder="Your message"
+              ></textarea>
             </div>
           </form>
           <PrimaryButton>Submit</PrimaryButton>
