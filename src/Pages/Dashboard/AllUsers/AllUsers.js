@@ -59,7 +59,7 @@ const AllUsers = () => {
                   )}
                 </td>
                 <td>
-                  <button className="btn btn-xs btn-danger">Delete</button>
+                  <button className="btn btn-xs btn-error">Delete</button>
                 </td>
               </tr>
             ))}
