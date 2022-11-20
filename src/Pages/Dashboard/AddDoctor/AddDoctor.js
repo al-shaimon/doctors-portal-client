@@ -10,6 +10,8 @@ const AddDoctor = () => {
     formState: { errors },
   } = useForm();
 
+  const imageHostKey = process.env.REACT_APP_imgbb_key;
+
   const { data: specialties, isLoading } = useQuery({
     queryKey: ['specialty'],
     queryFn: async () => {
@@ -20,7 +22,20 @@ const AddDoctor = () => {
   });
 
   const handleAddDoctor = (data) => {
-    console.log(data);
+    const image = data.image[0];
+    const formData = new FormData();
+    formData.append('image', image);
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageHostKey}`;
+    fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        if (imgData.success) {
+          console.log(imgData.data.url);
+        }
+      });
   };
 
   if (isLoading) {
@@ -63,9 +78,7 @@ const AddDoctor = () => {
           <label className="label">
             <span className="label-text">Specialty</span>
           </label>
-          <select 
-          {...register('specialty')}
-          className="select input-bordered w-full max-w-xs">
+          <select {...register('specialty')} className="select input-bordered w-full max-w-xs">
             {specialties.map((specialty) => (
               <option key={specialty._id} value={specialty.name}>
                 {specialty.name}
@@ -79,17 +92,24 @@ const AddDoctor = () => {
           </label>
           <input
             type="file"
-            {...register('img', {
+            {...register('image', {
               required: 'Photo is required',
             })}
             className="input input-bordered w-full max-w-xs"
           />
-          {errors.img && <p className="text-red-500">{errors.img.message}</p>}
+          {errors.image && <p className="text-red-500">{errors.image.message}</p>}
         </div>
         <input className="btn btn-accent w-full mt-4" value="Add Doctor" type="submit" />
       </form>
     </div>
   );
 };
+
+/**
+ * Three places to store images
+ * 1. Third party image hosting server
+ * 2. File system of your server
+ * 3. MongoDB (database)
+ */
 
 export default AddDoctor;
