@@ -18,17 +18,20 @@ const DashboardLayout = () => {
         <div className="drawer-side">
           <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-            {/* <!-- Sidebar content here --> */}
             <li>
               <Link to="/dashboard">My Appointments</Link>
             </li>
-            <li>
-              {isAdmin && (
-                <>
+
+            {isAdmin && (
+              <>
+                <li>
                   <Link to="/dashboard/allusers">All Users</Link>
-                </>
-              )}
-            </li>
+                </li>
+                <li>
+                  <Link to="/dashboard/adddoctor">Add A Doctor</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
