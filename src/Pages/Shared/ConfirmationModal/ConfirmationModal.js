@@ -1,6 +1,13 @@
 import React from 'react';
 
-const ConfirmationModal = ({ title, message, closeModal, modalData, successAction }) => {
+const ConfirmationModal = ({
+  title,
+  message,
+  closeModal,
+  modalData,
+  successAction,
+  successButtonName,
+}) => {
   return (
     <div>
       {/* Put this part before </body> tag */}
@@ -13,9 +20,9 @@ const ConfirmationModal = ({ title, message, closeModal, modalData, successActio
             <label
               onClick={() => successAction(modalData)}
               htmlFor="confirmation-modal"
-              className="btn"
+              className="btn btn-primary"
             >
-              Yay!
+              {successButtonName}
             </label>
             <button onClick={closeModal} className="btn btn-outline">
               Cancel
