@@ -32,6 +32,7 @@ const Login = () => {
         const user = result.user;
         console.log(user);
         setLoginUserEmail(data.email);
+        navigate('/dashboard');
       })
       .catch((error) => {
         console.error(error.message);
