@@ -17,11 +17,13 @@ const AvailableAppointments = ({ selectedDate }) => {
   } = useQuery({
     queryKey: ['appointmentOptions', date],
     queryFn: () =>
-      fetch(`http://localhost:5000/v2/appointmentOptions?date=${date}`).then((res) => res.json()),
+      fetch(`https://doctors-portal-server-xi.vercel.app/v2/appointmentOptions?date=${date}`).then(
+        (res) => res.json()
+      ),
   });
 
   // useEffect(() => {
-  //   fetch('http://localhost:5000/appointmentOptions')
+  //   fetch('https://doctors-portal-server-xi.vercel.app/appointmentOptions')
   //     .then((res) => res.json())
   //     .then((data) => setAppointmentOptions(data));
   // }, []);
